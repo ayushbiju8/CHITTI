@@ -103,6 +103,8 @@ const toggleListening = () => {
     }
   };
 
+  
+
   return (
     <div className="body">
       <canvas id="ambient-canvas" className="ambient-background"></canvas>
