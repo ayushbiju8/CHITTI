@@ -1,0 +1,694 @@
+/* Basic reset and full page layout */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(125deg, #0a0121 0%, #1e1246 50%, #1e0b3e 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    color: white;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* Ambient background */
+  .ambient-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.6;
+  }
+  
+  /* Glowing orbs for additional background effects */
+  .glowing-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    z-index: 1;
+  }
+  .cxx{
+    display: none;
+  }
+
+  .top-left {
+    top: -50px;
+    left: -50px;
+    width: 300px;
+    height: 300px;
+    background: rgba(130, 60, 255, 0.3);
+    animation: float 8s ease-in-out infinite alternate;
+  }
+  
+  .bottom-right {
+    bottom: -100px;
+    right: -50px;
+    width: 400px;
+    height: 400px;
+    background: rgba(90, 206, 227, 0.2);
+    animation: float 6s ease-in-out infinite alternate-reverse;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(30px, 30px);
+    }
+  }
+  
+  /* Main wrapper */
+  .whole {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* Logo section */
+  .topLogo {
+    text-align: center;
+    margin-top: 20px;
+    height: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    position: relative;
+    z-index: 3;
+  }
+  
+  .logo-text {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    background: linear-gradient(to right, #5acee3, #a742f5, #f30bf5);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: -10px;
+    text-shadow: 0 0 15px rgba(243, 11, 245, 0.3);
+    animation: glow 3s ease-in-out infinite alternate;
+  }
+  
+  @keyframes glow {
+    0% {
+      filter: drop-shadow(0 0 5px rgba(90, 206, 227, 0.5));
+    }
+    100% {
+      filter: drop-shadow(0 0 15px rgba(243, 11, 245, 0.5));
+    }
+  }
+  
+  .logo-tagline {
+    font-size: 15px;
+    opacity: 0.8;
+    letter-spacing: 3px;
+    background: linear-gradient(to right, #5acee3, #8866ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  /* Center section - Microphone */
+  .centerHolder {
+    height: 35%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  /* Status text */
+  .status-text {
+    margin-top: 30px;
+    font-size: 16px;
+    opacity: 0.8;
+    letter-spacing: 1px;
+    text-align: center;
+    min-height: 22px;
+    max-width: 300px;
+    background: linear-gradient(to right, #5acee3, #f30bf5);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 500;
+  }
+  
+  /* Mic effect styles */
+  .mic {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    scale: 0.7;
+  }
+  
+  .mic:hover {
+    transform: scale(1.05);
+  }
+  
+  .mic.active {
+    animation: pulse 1.5s infinite alternate;
+  }
+  
+  /* Pulsing background */
+  .mic::before,
+  .mic::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 100%;
+    z-index: 2;
+    transition: all 0.3s ease;
+  }
+  
+  .mic::before {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(26, 8, 78, 0.7) 0%, rgba(26, 8, 78, 0.4) 70%, rgba(26, 8, 78, 0) 100%);
+    box-shadow: 0 0 30px rgba(90, 206, 227, 0.3);
+    backdrop-filter: blur(5px);
+  }
+  
+  .mic::after {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(61, 45, 105, 0.8) 0%, rgba(47, 30, 95, 0.5) 100%);
+    animation: circle-size 3s ease-in-out infinite alternate;
+    box-shadow: 
+      inset 0 0 20px rgba(90, 206, 227, 0.5),
+      0 0 30px rgba(243, 11, 245, 0.3);
+  }
+  
+  .mic.active::after {
+    animation: circle-size 0.8s ease-in-out infinite alternate;
+    background: radial-gradient(circle, rgba(90, 206, 227, 0.3) 0%, rgba(47, 30, 95, 0.6) 100%);
+    box-shadow: 
+      inset 0 0 30px rgba(90, 206, 227, 0.7),
+      0 0 40px rgba(243, 11, 245, 0.5);
+  }
+  
+  /* Mic rings animation */
+  .mic-rings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(rgba(90, 206, 227, 0.05), rgba(243, 11, 245, 0.05));
+    z-index: 1;
+  }
+  
+  .mic.active .mic-rings::before,
+  .mic.active .mic-rings::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    animation: ring-expand 2s infinite;
+  }
+  
+  .mic.active .mic-rings::after {
+    animation-delay: 0.5s;
+  }
+  
+  /* Audio waves animation */
+  .audio-waves {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90px;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+  }
+  
+  .audio-wave {
+    width: 8px;
+    height: 8px;
+    background: linear-gradient(to bottom, #5acee3, #f30bf5);
+    border-radius: 2px;
+  }
+  
+  .audio-wave:nth-child(1) {
+    animation: wave 0.8s infinite ease alternate;
+    animation-delay: 0s;
+  }
+  
+  .audio-wave:nth-child(2) {
+    animation: wave 0.8s infinite ease alternate;
+    animation-delay: 0.1s;
+  }
+  
+  .audio-wave:nth-child(3) {
+    animation: wave 0.8s infinite ease alternate;
+    animation-delay: 0.2s;
+  }
+  
+  .audio-wave:nth-child(4) {
+    animation: wave 0.8s infinite ease alternate;
+    animation-delay: 0.3s;
+  }
+  
+  .audio-wave:nth-child(5) {
+    animation: wave 0.8s infinite ease alternate;
+    animation-delay: 0.4s;
+  }
+  
+  .audio-wave:nth-child(6) {
+    animation: wave 0.8s infinite ease alternate;
+    animation-delay: 0.5s;
+  }
+  
+  @keyframes wave {
+    0% {
+      height: 8px;
+    }
+    100% {
+      height: 25px;
+    }
+  }
+  
+  /* Mic Icon */
+  .mic-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(4);
+    width: 16px;
+    height: 12px;
+    border-bottom-left-radius: 120px;
+    border-bottom-right-radius: 120px;
+    border: 2px solid #fff;
+    border-top: 0;
+    margin-top: 20px;
+    z-index: 3;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+  
+  .mic-icon::before,
+  .mic-icon::after {
+    content: "";
+    position: absolute;
+  }
+  
+  .mic-icon::before {
+    width: 2px;
+    height: 5px;
+    top: calc(100% + 1px);
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  }
+  
+  .mic-icon::after {
+    border: 2px solid #fff;
+    width: 8px;
+    height: 18px;
+    left: 50%;
+    top: -10px;
+    border-radius: 4px;
+    transform: translate(-50%, 0);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  }
+  
+  /* Mic Shadow Effect */
+  .mic-shadow {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 100%;
+    z-index: 1;
+    box-shadow:
+      10px -55px 30px 15px rgba(130, 60, 166, 0.4),
+      24px -10px 47px 10px rgba(170, 179, 210, 0.5),
+      -21px -25px 97px 10px rgba(90, 206, 227, 0.6),
+      51px 5px 17px 10px rgba(27, 125, 143, 0.4),
+      3px 2px 77px 10px rgba(243, 11, 245, 0.5);
+    animation: shadow-rotate 10s linear infinite;
+    transform: translate(-50%, -50%);
+    opacity: 0.7;
+  }
+  
+  .mic.active .mic-shadow {
+    animation: shadow-rotate 3s linear infinite;
+    opacity: 1;
+    box-shadow:
+      10px -55px 40px 20px rgba(130, 60, 166, 0.6),
+      24px -10px 57px 15px rgba(170, 179, 210, 0.7),
+      -21px -25px 107px 15px rgba(90, 206, 227, 0.8),
+      51px 5px 27px 15px rgba(27, 125, 143, 0.6),
+      3px 2px 87px 15px rgba(243, 11, 245, 0.7);
+  }
+  
+  /* Chat Section */
+  .chat {
+    height: 50%;
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px 24px 0 0;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+      0 -5px 20px rgba(90, 206, 227, 0.1),
+      0 5px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .chat-header {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, rgba(90, 206, 227, 0.1), rgba(243, 11, 245, 0.1));
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .chat-handle {
+    width: 60px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+  }
+  
+  .chat-container {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: calc(100% - 30px);
+    overflow: hidden;
+  }
+  
+  .messages-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+    padding-right: 10px;
+    flex-grow: 1;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  }
+  
+  .messages-container::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .messages-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .messages-container::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+  }
+  
+  .message {
+    display: flex;
+    gap: 10px;
+    animation: fade-in 0.3s ease-in-out;
+    max-width: 85%;
+  }
+  
+  .ai-message {
+    align-self: flex-start;
+  }
+  
+  .user-message {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+  }
+  
+  .ai-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #5acee3, #a742f5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(90, 206, 227, 0.5);
+    flex-shrink: 0;
+  }
+  
+  .avatar-inner {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(26, 8, 78, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    font-size: 18px;
+  }
+  
+  .message-bubble {
+    padding: 12px 16px;
+    border-radius: 18px;
+    word-break: break-word;
+    line-height: 1.4;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .ai-message .message-bubble {
+    border-bottom-left-radius: 4px;
+    background: linear-gradient(135deg, rgba(90, 206, 227, 0.15), rgba(130, 60, 166, 0.15));
+    border: 1px solid rgba(90, 206, 227, 0.3);
+  }
+  
+  .user-message .message-bubble {
+    border-bottom-right-radius: 4px;
+    background: linear-gradient(135deg, rgba(243, 11, 245, 0.15), rgba(130, 60, 166, 0.15));
+    border: 1px solid rgba(243, 11, 245, 0.3);
+  }
+  
+  .current-input {
+    padding: 12px 16px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border-radius: 12px;
+    font-size: 16px;
+    animation: fade-in 0.3s ease-in-out;
+    margin-bottom: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .input-prefix {
+    opacity: 0.7;
+    margin-right: 5px;
+    font-weight: 500;
+    color: #a742f5;
+  }
+  
+  .blinking-cursor {
+    animation: blink 1s step-end infinite;
+    margin-left: 2px;
+    color: #5acee3;
+  }
+  
+  /* Keyframes */
+  @keyframes circle-size {
+    from {
+      width: 200px;
+      height: 200px;
+    }
+    to {
+      width: 250px;
+      height: 250px;
+    }
+  }
+  
+  @keyframes shadow-rotate {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+  
+  @keyframes pulse {
+    from {
+      transform: scale(1);
+    } 
+    to {
+      transform: scale(1.05);
+    }
+  }
+  
+  @keyframes ring-expand {
+    0% {
+      width: 150px;
+      height: 150px;
+      opacity: 0.5;
+    }
+    100% {
+      width: 350px;
+      height: 350px;
+      opacity: 0;
+    }
+  }
+  
+  @keyframes blink {
+    from, to {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Media queries for responsiveness */
+  @media (max-width: 768px) {
+    .mic::before {
+      width: 250px;
+      height: 250px;
+    }
+    
+    .mic::after {
+      width: 180px;
+      height: 180px;
+    }
+    
+    .mic-shadow {
+      width: 250px;
+      height: 250px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .logo-text {
+      font-size: 38px;
+    }
+    
+    .mic::before {
+      width: 220px;
+      height: 220px;
+    }
+    
+    .mic::after {
+      width: 150px;
+      height: 150px;
+    }
+    
+    .mic-shadow {
+      width: 220px;
+      height: 220px;
+    }
+    
+    .message {
+      max-width: 90%;
+    }
+    
+    .message-bubble {
+      font-size: 15px;
+    }
+  }
+
+/* Chat Input Container */
+.chat-input-container {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0 0 24px 24px;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 18px;
+  color: white;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.chat-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.chat-input:focus {
+  border-color: rgba(90, 206, 227, 0.5);
+  box-shadow: 0 0 10px rgba(90, 206, 227, 0.3);
+}
+
+.send-button {
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #5acee3, #a742f5);
+  border: none;
+  border-radius: 18px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.send-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(90, 206, 227, 0.5);
+}
